@@ -1,0 +1,8 @@
+{
+    "python.defaultInterpreterPath": "/home/maestro/python/venvs/anki/bin/python3",
+    "python.testing.pytestArgs": [
+      "__pycache__"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+  }
