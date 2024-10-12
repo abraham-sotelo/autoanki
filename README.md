@@ -27,3 +27,4 @@ This mainly involves to add and modify card templates
 4. Create the template for the note
 5. Add the note to Anki
 6. Add info about OpenAI api-key
+7. Add Vscode debug
