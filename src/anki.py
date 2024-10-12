@@ -33,9 +33,3 @@ class Anki:
   def get_note_info(self, note_id):
     response = self.perform_action("notesInfo", {"notes": [note_id]})
     return json.dumps(response, indent=4)
-  
-
-
-    
-    
-
