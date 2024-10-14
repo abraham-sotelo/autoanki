@@ -1,5 +1,6 @@
 import unittest
-from unittest.mock import patch
+import json
+from unittest.mock import patch, call
 from src.anki import Anki
 
 class TestAnki(unittest.TestCase):
@@ -28,9 +29,9 @@ class TestAnki(unittest.TestCase):
         result = anki.perform_action(action, params)
         self.assertEqual(result, expectedResult)
 
-
+  @patch('builtins.print')
   @patch("src.anki.requests.post")
-  def test_check_note_exists(self, mock_post):
+  def test_check_note_exists(self, mock_post, mock_print):
     anki = Anki()
     test_cases = [
       {"msg": "Test with correct deck, note and fields",
@@ -51,6 +52,36 @@ class TestAnki(unittest.TestCase):
         mock_post.return_value.json.return_value = {"result": ["note1", "note2"]} if expectedResult else {"result": []}
         result = anki.check_note_exists(deck, note, fields)
         self.assertEqual(result, expectedResult)
+        mock_print.assert_called_with(f"deck:{deck} "+" OR ".join([f"{field}:{note}" for field in fields]))
+
+
+  @patch('builtins.print')
+  @patch("src.anki.requests.post")
+  def test_add_note(self, mock_post, mock_print):
+    anki = Anki()
+    test_cases = [
+      {"msg": "Adding note",
+       "note": "note", "expectedResult": True},
+      {"msg": "Trying to add duplicated note",
+       "note": "duplicatedNote", "expectedResult": False},
+      {"msg": "Trying to add bad note",
+       "note": "badNote", "expectedResult": False},
+    ]
+    for case in test_cases:
+      with self.subTest(msg = f"{case["msg"]}"):
+        note = case["note"]
+        expectedResult = case["expectedResult"]
+        if expectedResult:
+          response = {"result": 11111, "error": None}
+        else:
+          response = {"result": None, "error": "Error"}
+        mock_post.return_value.json.return_value = response
+        result = anki.add_note(note)
+        self.assertEqual(result, expectedResult)
+        mock_print.assert_has_calls([
+          call(f"Adding note:\n{json.dumps(note, indent=4)}"),
+          call(f"Response: {json.dumps(response, indent=4)}")
+        ], any_order=False)
 
 
 if __name__ == '__main__':

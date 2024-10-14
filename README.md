@@ -29,3 +29,5 @@ This mainly involves to add and modify card templates
 6. Add info about OpenAI api-key
 7. Add Vscode debug
 8. Project setup script: create venv, set vscode python intepreter
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
