@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 import argparse
 from language import Language
-from anki import Anki
+import anki
 
 def add_note(anki, language, word):
   if anki.check_note_exists(language.deck, word, language.query_fields):
     print(f"Note for {word} already exists")
   else:
+    # I need to form the example from language
+    # Insert the example in the prompt
+    # Send the prompt to ChatGPT
+    # Get the relevant response from ChatGPT
+    # Form the note from the response
+    # Add the note to Anki
+
     note = {
       "note": {
         "deckName": "My-deck",
@@ -44,7 +51,6 @@ def main():
   print(f"Command: {args.command}")
   language = Language(args.language)
   word = args.word
-  anki = Anki()
 
   match args.command:
     case ADD_NOTE:

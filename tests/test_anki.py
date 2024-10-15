@@ -1,13 +1,12 @@
 import unittest
 import json
 from unittest.mock import patch, call
-from src.anki import Anki
+import src.anki as anki
 
 class TestAnki(unittest.TestCase):
 
   @patch("src.anki.requests.post")
   def test_perform_action(self, mock_post):
-    anki = Anki()
     test_cases = [
       {"msg": "Test with correct action and params",
        "action": "action", "params": {"param": "value"}, "expectedResult": {"result": "test"}},
@@ -32,7 +31,6 @@ class TestAnki(unittest.TestCase):
   @patch('builtins.print')
   @patch("src.anki.requests.post")
   def test_check_note_exists(self, mock_post, mock_print):
-    anki = Anki()
     test_cases = [
       {"msg": "Test with correct deck, note and fields",
        "deck": "deck", "note": "note", "fields": ["field1", "field2"], "expectedResult": True},
@@ -58,7 +56,6 @@ class TestAnki(unittest.TestCase):
   @patch('builtins.print')
   @patch("src.anki.requests.post")
   def test_add_note(self, mock_post, mock_print):
-    anki = Anki()
     test_cases = [
       {"msg": "Adding note",
        "note": "note", "expectedResult": True},
