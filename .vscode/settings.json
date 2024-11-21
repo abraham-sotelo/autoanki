@@ -1,5 +1,5 @@
 {
-    "python.defaultInterpreterPath": "/home/maestro/python/venvs/anki/bin/python3",
+    "python.defaultInterpreterPath":"${env:AUTOANKI_PYTHON_PATH}",
     "python.testing.pytestArgs": [
       "__pycache__"
     ],
