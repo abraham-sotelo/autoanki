@@ -10,7 +10,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/autoanki.py",
       "console": "integratedTerminal",
-      "args": ["modifyModel", "polish", "dog"]
+      //"args": ["action", "modelFieldNames", "json_params/modelFieldNames.json"]
+      "args": ["action", "modelFieldNames", "{\"modelName\": \"Rzeczownik\"}"]
       //"args": "${command:pickArgs}"
     }
   ]

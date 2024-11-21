@@ -22,43 +22,44 @@ def add_note(language, word):
     print(anki.add_note(note))
 
 
-def modify_model(language, word):
-  if language.language == "polish":
-    if word == "Rzeczownik":
-      model = notes.form_noun_model(language, word)
-      anki.update_model(model)
-  return
-
-  print("Modifying")
-  notes.form_noun_model_fields(language)
+def perform_action(action, argParams):
+  if argParams.endswith(".json"):
+    with open(argParams) as jsonFile:
+      params = json.load(jsonFile)
+  elif argParams.startswith("{"):
+    params = json.loads(argParams)
+  else:
+    print("Not valid params detected, using an empty dictionary")
+    params = {}
+  response = anki.perform_action(action, params)
+  print(json.dumps(response, indent=4, ensure_ascii=False))
 
 
 def main():
   LANGUAGE_OPTIONS = ("polish", "english")
   ADD_NOTE = "addNote"
-  ADD_MODEL = "addModel"
-  MODIFY_MODEL = "modifyModel"
-  COMMAND_OPTIONS = (ADD_NOTE, ADD_MODEL, MODIFY_MODEL)  
+  ACTION = "action"
 
+  # Top level argument parser
   argParser = argparse.ArgumentParser(
     prog="anky.py",
     description="It automatically creates Polish vocabulary flash cards in Anki"
   )
-  argParser.add_argument("command", choices=COMMAND_OPTIONS)
-  argParser.add_argument("language", choices=LANGUAGE_OPTIONS)
-  argParser.add_argument("word", type=str)
+  subparsers = argParser.add_subparsers(dest="command", required=True)
+  # Subparser for the addNote command
+  addNoteParser = subparsers.add_parser(ADD_NOTE)
+  addNoteParser.add_argument("language", choices=LANGUAGE_OPTIONS)
+  addNoteParser.add_argument("word", type=str)
+  # Subparser for the action command
+  actionParser = subparsers.add_parser(ACTION)
+  actionParser.add_argument("action", type=str)
+  actionParser.add_argument("params", type=str)
   args = argParser.parse_args()
 
-  print(f"Command: {args.command}")
-  language = Language(args.language)
-  word = args.word
-
   if args.command == ADD_NOTE:
-    add_note(language, word)
-  elif args.command == ADD_MODEL:
-    pass
-  elif args.command == MODIFY_MODEL:
-    modify_model(language, word)
+    add_note(args.language, args.word)
+  elif args.command == ACTION:
+    perform_action(args.action, args.params)
   else:
     print("Invalid command")
 
