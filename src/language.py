@@ -8,6 +8,7 @@ class Language:
     self.cases = languages[language]["cases"]
     self.genres = languages[language]["genders"]
     self.quantities = languages[language]["quantities"]
+    self.prompt = languages[language]["prompt"]
     
   def get_language(self):
     return self.language
@@ -20,3 +21,6 @@ class Language:
   
   def get_quantities(self):
     return self.quantities
+
+  def get_prompt(self):
+    return self.prompt
