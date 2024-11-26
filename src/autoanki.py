@@ -7,6 +7,7 @@ import notes
 import json
 
 def add_note(language, word):
+  language = Language(language)
   if anki.check_note_exists(language.deck, word, language.query_fields):
     print(f"Note for {word} already exists")
   else:

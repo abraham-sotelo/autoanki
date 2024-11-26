@@ -2,7 +2,6 @@ languages = {
   "polish": {
     "deck": "Polski",
     "query_fields": ("Angielski", "Hiszpański"),
-    "types": ("Rzeczownik", "Czasownik", "Przymiotnik", "Przysłówek", "Zaimek", "Przyimek", "Spójnik", "Wykrzyknik", "Pytajnik"),
     "cases": ("mianownik", "dopełniacz", "celownik", "biernik", "narzędnik", "miejscownik", "wołacz"),
     "genders": ("męski", "żeński", "nijaki"),
     "quantities": ("pojedyncza", "mnoga"),
@@ -17,7 +16,8 @@ languages = {
       'For example, if the word is "dog", your answer should look like this:\n'
       '{'
       '"type": "Rzeczownik", '
-      '"Angielski": "dog", '
+      '"Angielski-pojedyncza": "dog", '
+      '"Angielski-mnoga": "dogs", '
       '"Polski-pojedyncza-mianownik": "pies", '
       '"Polski-pojedyncza-dopełniacz": "psa", '
       '"Polski-pojedyncza-celownik": "psu", '
