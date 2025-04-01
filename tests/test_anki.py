@@ -50,7 +50,7 @@ class TestAnki(unittest.TestCase):
         mock_post.return_value.json.return_value = {"result": ["note1", "note2"]} if expectedResult else {"result": []}
         result = anki.check_note_exists(deck, note, fields)
         self.assertEqual(result, expectedResult)
-        mock_print.assert_called_with(f"deck:{deck} "+" OR ".join([f"{field}:{note}" for field in fields]))
+        mock_print.assert_called_with(f"Check note exists - deck:{deck} "+" OR ".join([f"{field}:{note}" for field in fields]))
 
 
   @patch('builtins.print')
