@@ -104,6 +104,20 @@ Add card template
     "error": null
 }
 ```
+## Print additional debug info
+
+To enable detailed debugging information, set the `DEBUG` environment variable to `1`,  when running the script. This will print additional logs to help with troubleshooting.
+
+### Example
+
+Run the script with debugging enabled:
+```bash
+DEBUG=1 ./autoanki.py addNote Polish dog
+```
+
+This will output detailed information about the script's execution, including API requests and responses.
+
+
 
 ## Ad-hoc manual modifications example
 There are modifications that are going to be performed once that can rely on some python logic for parameters manipulation. In such cases, it makes sense to implement them manually in the python console.

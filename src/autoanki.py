@@ -5,6 +5,7 @@ import anki
 import chatGPT
 import notes
 import json
+from logger import logger
 
 def add_note(language, word):
   language = Language(language)
@@ -12,15 +13,13 @@ def add_note(language, word):
     print(f"Note for {word} already exists")
   else:
     prompt = language.get_prompt().replace("#word#", f'"{word}"')
-    print("ChatGPT prompt: " + prompt)
+    logger.debug("ChatGPT prompt: " + prompt)
 
     #response = chatGPT.send_prompt(prompt)
     response = {"type": "Rzeczownik", "Angielski": "doggy", "Polski-pojedyncza-mianownik": "pies", "Polski-pojedyncza-dopełniacz": "psa", "Polski-pojedyncza-celownik": "psu", "Polski-pojedyncza-biernik": "psa", "Polski-pojedyncza-narzędnik": "psem", "Polski-pojedyncza-miejscownik": "psie", "Polski-pojedyncza-wołacz": "psie", "Polski-mnoga-mianownik": "psy", "Polski-mnoga-dopełniacz": "psów", "Polski-mnoga-celownik": "psom", "Polski-mnoga-biernik": "psy", "Polski-mnoga-narzędnik": "psami", "Polski-mnoga-miejscownik": "psach", "Polski-mnoga-wołacz": "psy"}
     model = response.pop("type")
     note = notes.form_note("My-deck", model, response)
-
-    # Add the note to Anki
-    print(anki.add_note(note))
+    anki.add_note(note)
 
 
 def perform_action(action, argParams):
