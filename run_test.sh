@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python -m unittest discover tests --verbose
+DEBUG=1 python -m unittest discover tests --verbose

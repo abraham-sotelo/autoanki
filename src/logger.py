@@ -3,7 +3,7 @@ import os
 
 # Set up logging configuration
 def get_logger():
-    level = os.getenv("DEBUG", "WARNING").upper()
+    level = "DEBUG" if os.getenv("DEBUG") == "1" else "WARNING"
     logging.basicConfig(level=level)
     return logging.getLogger(__name__)
 
