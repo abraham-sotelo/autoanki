@@ -1,4 +1,5 @@
 from openai import OpenAI
+import json
 import os
 
 client = OpenAI(
@@ -18,5 +19,6 @@ def send_prompt(prompt):
   print(chat_completion.model_dump_json(indent=4))
   print("\n\n============================\n\n")
   print(chat_completion.choices[0].message.content)
+  return json.loads(chat_completion.choices[0].message.content)
 
 # Example usage

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import argparse
-from language import Language
-import anki
-import chatGPT
-import notes
 import json
-from logger import logger
+import src.anki as anki
+import src.chatGPT as chatGPT
+import src.notes as notes
+from src.language import Language
+from src.logger import logger
 
 def add_note(language, word):
   language = Language(language)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import requests
 import json
-from logger import logger
+from src.logger import logger
 
 def perform_action(action, params):
   payload = {

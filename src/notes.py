@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from itertools import product
 import json
 
 def form_note(deck, model, fields):
@@ -29,18 +30,17 @@ note = {
     }
 
 # Auxiliary functions
-def form_noun_model(language, modelType):
+def form_noun_model(language):
   ''' Form a noun model for the given language.
 
   Args:
     language (str): The language for which the model is created.
-    modelType (str): The model name, refers to the translation of the word "noun".
 
   Returns:
     dict: The model for the given language.
 
   Example:
-    >>> form_noun_model("Language("polish"), "Rzeczownik")
+    >>> form_noun_model("Language("polish"))
     {
       "model": "Basic",
       "fields": [
@@ -60,13 +60,16 @@ def form_noun_model(language, modelType):
         {'name': 'Polski-mnoga-wołacz'}
       ]
     }
-      '''
-  fieldNounName = [f"{y}-{x}" for y in language.quantities for x in language.cases]
-  fieldsNoun = tuple({"name": f'{language.deck}-{field}'} for field in fieldNounName)
-  print("Noun model:")
+  '''
+
+  l = language
+  modelType = l.models["noun"]["name"]
+  all_fields = [[l.deck]] + [getattr(l, item) for item in l.models["noun"]["types"]]
+  fieldsNoun = tuple({"name": '-'.join(combination)} for combination in product(*all_fields))
   model = {
     "model": modelType,
     "fields": fieldsNoun,
   }
+  print("Noun model:")
   print(json.dumps(model, indent=4, ensure_ascii=False))
   return model

@@ -196,9 +196,10 @@ I needed to modify the noun fields in order to have singular and plural translat
 
 
 ## To Do
+1. Create the plural fields in the nouns models (Probably I need to redisign the whole model)
+2. Create the adjectives model
 3. Extract the response from chatGPT (word, translation, grammar cases)
 4. Create the template for the note
-5. Add the note to Anki
 6. Add info about OpenAI api-key
 7. Add Vscode debug
 8. Project setup script: create venv, set vscode python intepreter

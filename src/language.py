@@ -1,4 +1,4 @@
-from templates import languages
+from src.templates import languages
 
 class Language:
   def __init__(self, language):
@@ -8,6 +8,7 @@ class Language:
     self.cases = languages[language]["cases"]
     self.genres = languages[language]["genders"]
     self.quantities = languages[language]["quantities"]
+    self.models = languages[language]["models"]
     self.prompt = languages[language]["prompt"]
     
   def get_language(self):
